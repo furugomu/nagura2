@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="nagura">
  <head>
   <meta charset=UTF-8>
   <title>nagura</title>
@@ -17,7 +17,7 @@
 
   <section class="dojos">
    <article ng-repeat="dojo in dojos">
-    <p>ID: {{dojo.id}}</p>
+    <p><a nagura-dojo-href>ID: {{dojo.id}}</a></p>
     <p>level: {{dojo.prof.Lv}}</p>
     <p>rank: {{dojo.prof.Rank}}</p>
     <p>leader: {{dojo.prof.Ldr}}</p>
