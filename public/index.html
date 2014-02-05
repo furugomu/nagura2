@@ -17,7 +17,8 @@
 
   <section class="dojos">
    <article ng-repeat="dojo in dojos">
-    <p><a nagura-dojo-href>ID: {{dojo.id}}</a></p>
+    <p>click count: {{dojo.count}}</p>
+    <p><nagura-dojo-link>ID: {{dojo.id}}</nagura-dojo-link></p>
     <p>level: {{dojo.prof.Lv}}</p>
     <p>rank: {{dojo.prof.Rank}}</p>
     <p>leader: {{dojo.prof.Ldr}}</p>
