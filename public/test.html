@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset=UTF-8 />
+  <title>test</title>
+  <link rel=stylesheet href="bower_components/mocha/mocha.css"></script>
+ </head>
+ <body>
+  <div id=mocha></div>
+
+  <script src="bower_components/chai/chai.js"></script>
+  <script src="bower_components/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+
+  <script src="nagura.js"></script>
+  <script src="test/controllers_test.js"></script>
+  <script>
+mocha.checkLeaks();
+mocha.run();
+  </script>
+ </body>
+</html>
