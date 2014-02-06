@@ -2,7 +2,7 @@
 
 var app = angular.module('nagura', ['angularLocalStorage']);
 
-function NaguraCtrl($scope, $http, storage) {
+function NaguraCtrl($scope, $http, storage, saveVisitCount) {
   $http.get('/dojos.json')
   .success(function(data) {
     $scope.dojos = data;
@@ -13,7 +13,38 @@ function NaguraCtrl($scope, $http, storage) {
 
   storage.bind($scope, 'openInOtherWindow');
   storage.bind($scope, 'filterValue');
+
+  saveVisitCount($scope);
 }
+
+// 殴った回数を localStorage に保存する
+app.factory('saveVisitCount', function(storage) {
+  var counts;
+  // count の初期値を storage からもらう
+  var init = function(dojo, scope) {
+    var count = counts[dojo.id];
+    if (!count) return;
+    dojo.count = count;
+  }
+  // count が変わったら storage にいれる
+  var listener = function(dojo) {
+    if (!dojo) return;
+    if (dojo.count == null) return;
+    counts[dojo.id] = dojo.count;
+    storage.set('counts', counts);
+  }
+  return function(scope) {
+    counts = storage.get('counts') || {};
+    scope.$watch('dojos', function(dojos) {
+      angular.forEach(dojos, function(dojo) {
+        init(dojo, scope);
+        scope.$watchCollection(
+          function() { return dojo },
+          listener);
+      });
+    });
+  }
+});
 
 // 殴るリンク
 app.directive('naguraDojoLink', function() {
