@@ -77,3 +77,29 @@ describe('directives', function() {
     });
   });
 });
+
+describe('filters', function() {
+  beforeEach(module('nagura'));
+
+  describe('countLessThan', function() {
+    var dojos;
+    beforeEach(function() {
+      dojos = [{count:null},{count:2},{count:3},{count:4},{count:1}];
+    });
+
+    it('count < 3 だけ', inject(function(countLessThanFilter) {
+      var filtered = countLessThanFilter(dojos, 3);
+      expect(filtered).to.deep.equal(
+        [{count:null},{count:2},{count:1}]);
+    }));
+
+    it('null なら全て', inject(function(countLessThanFilter) {
+      var filtered = countLessThanFilter(dojos, null);
+      expect(filtered).to.deep.equal(dojos);
+    }));
+    it('false なら全て', inject(function(countLessThanFilter) {
+      var filtered = countLessThanFilter(dojos, false);
+      expect(filtered).to.deep.equal(dojos);
+    }));
+  });
+});

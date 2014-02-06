@@ -5,6 +5,7 @@ var app = angular.module('nagura', []);
 function NaguraCtrl($scope, $http) {
   $http.get('/dojos.json')
   .success(function(data) {
+    data[0].count = 4;
     $scope.dojos = data;
   })
   .error(function(data, status, headers, config) {
@@ -32,12 +33,24 @@ app.directive('naguraDojoLink', function() {
         element.attr('target', 'nagura-new-window');
 
       // クリック回数を増やす
-      element.on('click', function() {
+      element.on('click', function(e) {
+        e.preventDefault();
         scope.$apply(function() {
           if (dojo.count == null) dojo.count = 0;
           dojo.count += 1;
         });
       });
     }
+  }
+});
+
+// 殴れるのだけ表示
+app.filter('countLessThan', function($filter) {
+  return function(dojos, n) {
+    console.log('countLessThan', n);
+    if (!n) return dojos;
+    return $filter('filter')(dojos, function(dojo) {
+      return !dojo.count || dojo.count < n;
+    });
   }
 });

@@ -11,12 +11,15 @@
   <h1>nagura</h1>
 
   <section class="config">
-   <p><label><input type=checkbox>3 回殴った相手は隠す</label></p>
+   <p>
+    <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
+     3 回殴った相手は隠す</label>
+   </p>
    <p><label><input type=checkbox>別のタブで開く</label></p>
   </section>
 
   <section class="dojos">
-   <article ng-repeat="dojo in dojos">
+   <article ng-repeat="dojo in dojos|countLessThan:filterValue">
     <p>click count: {{dojo.count}}</p>
     <p><nagura-dojo-link>ID: {{dojo.id}}</nagura-dojo-link></p>
     <p>level: {{dojo.prof.Lv}}</p>
