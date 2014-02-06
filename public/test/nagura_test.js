@@ -43,8 +43,11 @@ describe('directives', function() {
   }));
 
   describe('naguraDojoLink', function() {
-    it('href=道場を殴る URL', function() {
+    beforeEach(function() {
       scope.dojo = {id: 56497169};
+    });
+
+    it('href=道場を殴る URL', function() {
       var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
       var url = 'http://sp.pf.mbga.jp/12008305/?url='+
         'http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattle%2Fbattle_check%2F56497169';
@@ -52,10 +55,8 @@ describe('directives', function() {
     });
 
     it('クリックしたら回数を増やす', function() {
-      scope.dojo = {id: 56497169};
       var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
       expect(scope.dojo.count).to.undefined;
-      console.log(el);
       el.triggerHandler('click');
       expect(scope.dojo.count).to.equal(1);
       el.triggerHandler('click');
@@ -64,16 +65,26 @@ describe('directives', function() {
 
     it('別窓で開く', function() {
       scope.openInOtherWindow = true;
-      scope.dojo = {id: 56497169};
       var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
+      scope.$digest();
       expect(el.attr('target')).to.equal('nagura-new-window');
     });
 
     it('別窓で開かない', function() {
       scope.openInOtherWindow = false;
-      scope.dojo = {id: 56497169};
+      var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
+      scope.$digest();
+      expect(el.attr('target')).to.equal('');
+    });
+
+    it('target が動的に変わる', function() {
+      scope.openInOtherWindow = false;
       var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
       expect(el.attr('target')).to.undefined;
+
+      scope.openInOtherWindow = true;
+      scope.$digest();
+      expect(el.attr('target')).to.equal('nagura-new-window');
     });
   });
 });
