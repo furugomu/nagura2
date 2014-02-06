@@ -28,6 +28,24 @@ describe('controllers', function() {
         [{id: 1, prof: {}}]);
     });
 
+    describe('変更されるたびに localStorage に保存する', function() {
+      beforeEach(function() {
+        localStorage.clear();
+      });
+
+      it('openInOtherWindow', function() {
+        scope.openInOtherWindow = true;
+        scope.$digest();
+        expect(localStorage.openInOtherWindow).to.equal('true');
+      });
+
+      it('filterValue', function() {
+        scope.filterValue = 3;
+        scope.$digest();
+        expect(localStorage.filterValue).to.equal('3');
+      });
+    });
+
   });
 });
 

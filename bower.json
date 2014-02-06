@@ -17,6 +17,8 @@
     "chai": "~1.9.0",
     "mocha": "~1.17.1",
     "angular-mocks": "~1.2.11",
-    "angular": "~1.2.11"
+    "angular": "~1.2.11",
+    "angularLocalStorage": "~0.1.7",
+    "angular-cookies": "~1.2.11"
   }
 }

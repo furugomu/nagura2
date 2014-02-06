@@ -1,8 +1,8 @@
 "use strict";
 
-var app = angular.module('nagura', []);
+var app = angular.module('nagura', ['angularLocalStorage']);
 
-function NaguraCtrl($scope, $http) {
+function NaguraCtrl($scope, $http, storage) {
   $http.get('/dojos.json')
   .success(function(data) {
     $scope.dojos = data;
@@ -10,6 +10,9 @@ function NaguraCtrl($scope, $http) {
   .error(function(data, status, headers, config) {
     alert('どうにもこれはだめです。 '+data);
   });
+
+  storage.bind($scope, 'openInOtherWindow');
+  storage.bind($scope, 'filterValue');
 }
 
 // 殴るリンク
