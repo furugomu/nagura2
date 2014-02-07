@@ -2,7 +2,7 @@
 <html ng-app="nagura">
  <head>
   <meta charset=UTF-8>
-  <title>nagura</title>
+  <title>nagura - アイドルマスターシンデレラガールズの道場リスト</title>
   <meta name="viewport" content="width=device-width">
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
@@ -12,15 +12,25 @@
   <link rel=stylesheet href=nagura.css>
  </head>
  <body ng-controller="NaguraCtrl">
-  <h1>nagura</h1>
-
   <main>
+   <header class="site-header">
+    <h1>nagura</h1>
+    <p>アイドルマスターシンデレラガールズの道場リスト</p>
+   </header>
+
+   <section class="readme">
+    <p>
+     お問い合わせは <a href="https://twitter.com/furugomu">@furugomu</a> へ。
+    </p>
+   </section>
+
    <section class="config">
     <p>
      <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
       3 回殴った相手は隠す</label>
      <label><input type=checkbox ng-model="openInOtherWindow">
       別のタブで開く</label>
+     <a href="/next">【New!】次の道場へ【便利！】</a>
     </p>
    </section>
 
@@ -44,6 +54,11 @@
      </div>
     </article>
    </section>
+
+   <footer>
+    <p><a href="http://sekai.in/imas/api.html">sekai.in API</a>を利用しています。</p>
+    <p><a href="https://bitbucket.org/furugomu/nagura2">Fork me on Bitbucket!</a></p>
+   </footer>
   </main>
  </body>
 </html>

@@ -4,9 +4,14 @@ body {
   line-height: 1.8;
 }
 
-h1 {
-  text-align: center;
+:link, :visited {
+  color: inherit;
 }
+
+.site-header * {
+  display: inline;
+}
+
 main {
   margin: 0 5em;
 }
