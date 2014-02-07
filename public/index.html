@@ -8,32 +8,42 @@
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src="bower_components/angularLocalStorage/src/angularLocalStorage.js"></script>
   <script src="nagura.js"></script>
+  <link rel=stylesheet href=bower_components/normalize-css/normalize.css>
+  <link rel=stylesheet href=nagura.css>
  </head>
  <body ng-controller="NaguraCtrl">
   <h1>nagura</h1>
 
-  <section class="config">
-   <p>
-    <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
-     3 回殴った相手は隠す</label>
-   </p>
-   <p>
-    <label><input type=checkbox ng-model="openInOtherWindow">
-     別のタブで開く</label>
-   </p>
-  </section>
+  <main>
+   <section class="config">
+    <p>
+     <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
+      3 回殴った相手は隠す</label>
+     <label><input type=checkbox ng-model="openInOtherWindow">
+      別のタブで開く</label>
+    </p>
+   </section>
 
-  <section class="dojos">
-   <article ng-repeat="dojo in dojos|countLessThan:filterValue">
-    <p>click count: {{dojo.count}}</p>
-    <p><nagura-dojo-link>ID: {{dojo.id}}</nagura-dojo-link></p>
-    <p>level: {{dojo.prof.Lv}}</p>
-    <p>rank: {{dojo.prof.Rank}}</p>
-    <p>leader: {{dojo.prof.Ldr}}</p>
-    <p>defense: {{dojo.prof.Def}}</p>
-    <p>comment: {{dojo.prof.Comm}}</p>
-    <p>updated: {{dojo.prof.Upd}}</p>
-   </article>
-  </section>
+   <section class="dojos">
+    <article class="dojo" ng-repeat="dojo in dojos|countLessThan:filterValue">
+     <div class="action">
+      <nagura-dojo-link>
+       <p class="count">{{dojo.count||0}}</p>
+       <p>殴る</p>
+      </nagura-dojo-link>
+     </div>
+     <div class="header">
+      <nagura-dojo-link>
+       <span class="rank {{dojo.prof.Rank}}">{{dojo.prof.Rank}}</span>
+      </nagura-dojo-link>
+      <span class="level">Lv {{dojo.prof.Lv}}</span>
+      <span class="leader">{{dojo.prof.Ldr}}</span>
+     </div>
+     <div class="content">
+      {{dojo.prof.Comm}}
+     </div>
+    </article>
+   </section>
+  </main>
  </body>
 </html>

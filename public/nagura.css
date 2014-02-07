@@ -1,0 +1,94 @@
+body {
+  background: #BEC7D7;
+  color: #393939;
+  line-height: 1.8;
+}
+
+h1 {
+  text-align: center;
+}
+main {
+  margin: 0 5em;
+}
+
+.dojos {
+}
+
+.dojo {
+  background: #E3E3E3;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  min-height: 4em;
+  clear: left;
+}
+
+.dojo p {
+  margin: 0;
+}
+.dojo :link, .dojo :visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dojo .header {
+  font-weight: bold;
+}
+
+.dojo .rank {
+  float: left;
+  font-size: 2em;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  background: silver;
+  margin-right: .5em;
+}
+
+.rank.S5 {
+  background: #D49076;
+}
+.rank.S4 {
+  background: #DCBE74;
+}
+.rank.S3 {
+  background: #E0CC72;
+}
+
+.dojo .action {
+  float: right;
+  width: 4em;
+}
+.dojo .action a {
+  display: inline-block;
+  text-align: center;
+  width: 4em;
+  height: 4em;
+  background: #C6C6C6;
+}
+.dojo .count {
+  font-size: 80%;
+  line-height: 2;
+}
+
+.dojo .content {
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
+@media screen and (max-width: 800px) {
+  main {
+    margin: 0 2em 2em;
+  }
+  body {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 480px) {
+  main {
+    margin: 0 0.5em 2em;
+  }
+  body {
+    font-size: 12px;
+  }
+}
