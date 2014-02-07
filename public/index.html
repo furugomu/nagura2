@@ -26,12 +26,21 @@
    </section>
 
    <section class="config">
+    <details>
+     <summary>設定など</summary>
+     <p>
+      <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
+       3 回殴った相手は隠す</label>
+     </p>
+     <p>
+      <label><input type=checkbox ng-model="openInOtherWindow">
+       別のタブで開く</label>
+     </p>
+     <p>
+      <a href="/next">【New!】次の道場へ【便利！】</a>
+     </p>
+    </details>
     <p>
-     <label><input type=checkbox ng-model="filterValue" ng-true-value="3">
-      3 回殴った相手は隠す</label>
-     <label><input type=checkbox ng-model="openInOtherWindow">
-      別のタブで開く</label>
-     <a href="/next">【New!】次の道場へ【便利！】</a>
      <button ng-click='reset()'>殴り回数リセット</button>
     </p>
    </section>
