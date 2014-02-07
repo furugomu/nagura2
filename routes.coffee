@@ -6,6 +6,10 @@ exports.index = (req, res) ->
 exports.dojos_json = (req, res) ->
   res.setHeader('application/json')
   models.dojos (err, dojos) ->
+    if (err)
+      console.error(err)
+      res.send(err)
+      return
     res.send(JSON.stringify(dojos))
 
 exports.next = (req, res) ->
