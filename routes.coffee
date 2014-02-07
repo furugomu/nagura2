@@ -8,9 +8,8 @@ exports.dojos_json = (req, res) ->
   models.dojos (err, dojos) ->
     if (err)
       console.error(err)
-      res.send(err)
       return
-    res.send(JSON.stringify(dojos))
+    res.end(JSON.stringify(dojos))
 
 exports.next = (req, res) ->
   if req.get('Referer')
