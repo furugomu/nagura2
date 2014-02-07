@@ -11,8 +11,8 @@ function NaguraCtrl($scope, $http, storage, visitCounts) {
     alert('どうにもこれはだめです。 '+data);
   });
 
-  storage.bind($scope, 'openInOtherWindow');
-  storage.bind($scope, 'filterValue');
+  storage.bind($scope, 'openInOtherWindow', {defaultValue: true});
+  storage.bind($scope, 'filterValue', {defaultValue: '3'});
 
   visitCounts.bind($scope);
   $scope.reset = function() {
