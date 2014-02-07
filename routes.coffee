@@ -4,7 +4,7 @@ exports.index = (req, res) ->
   res.sendfile 'public/index.html'
 
 exports.dojos_json = (req, res) ->
-  res.setHeader('application/json')
+  res.setHeader('Content-Type', 'application/json')
   models.dojos (err, dojos) ->
     if (err)
       console.error(err)

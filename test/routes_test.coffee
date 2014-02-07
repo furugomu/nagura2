@@ -31,7 +31,7 @@ describe 'routes', ->
   describe 'dojos.json', ->
     it '配列の JSON を返す', ->
       mock = sinon.mock(res)
-      mock.expects('setHeader').withArgs('application/json')
+      mock.expects('setHeader').withArgs('Content-Type', 'application/json')
       mock.expects('end').once().withArgs(sinon.match(/^\[.*\]$/))
       routes.dojos_json(req, res)
       mock.verify()
