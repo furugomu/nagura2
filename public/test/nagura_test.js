@@ -50,30 +50,46 @@ describe('controllers', function() {
 describe('services', function() {
   beforeEach(module('nagura'));
 
-  describe('saveVisitCount', function() {
+  describe('visitCounts', function() {
     var service;
     var scope;
     beforeEach(inject(function($injector, $rootScope) {
       localStorage.clear();
-      service = $injector.get('saveVisitCount');
+      service = $injector.get('visitCounts');
       scope = $rootScope.$new();
       scope.dojos = [
         {id: 1}, {id: 2, count: 1}
       ];
     }));
 
-    it('dojo.count が増えたら localStrage に保存する', function() {
-      service(scope);
-      scope.dojos[0].count = 2;
-      scope.$digest();
-      expect(localStorage.counts).to.exist;
+    describe('bind', function() {
+      it('dojo.count が増えたら localStrage に保存する', function() {
+        service.bind(scope);
+        scope.dojos[0].count = 2;
+        scope.$digest();
+        expect(localStorage.counts).to.exist;
+      });
+
+      it('dojo.count を localStorage の値で初期化', function() {
+        localStorage.counts = '{"1":1,"2":2}';
+        service.bind(scope);
+        scope.$digest();
+        expect(scope.dojos[0].count).to.equal(1);
+      });
     });
 
-    it('dojo.count を localStorage の値で初期化', function() {
-      localStorage.counts = '{"1":1,"2":2}';
-      service(scope);
-      scope.$digest();
-      expect(scope.dojos[0].count).to.equal(1);
+    describe('reset', function() {
+      it('ローカルストレージ消す', function() {
+        localStorage.counts = '{"1":1,"2":2}';
+        service.reset(scope);
+        expect(localStorage.counts).to.not.exist;
+      });
+
+      it('dojos count 0 にする', function() {
+        scope.dojos[0].count = 999;
+        service.reset(scope);
+        expect(scope.dojos[0].count).to.equal(0);
+      });
     });
   });
 });

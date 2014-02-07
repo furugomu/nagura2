@@ -2,7 +2,7 @@
 
 var app = angular.module('nagura', ['angularLocalStorage']);
 
-function NaguraCtrl($scope, $http, storage, saveVisitCount) {
+function NaguraCtrl($scope, $http, storage, visitCounts) {
   $http.get('/dojos.json')
   .success(function(data) {
     $scope.dojos = data;
@@ -14,11 +14,16 @@ function NaguraCtrl($scope, $http, storage, saveVisitCount) {
   storage.bind($scope, 'openInOtherWindow');
   storage.bind($scope, 'filterValue');
 
-  saveVisitCount($scope);
+  visitCounts.bind($scope);
+  $scope.reset = function() {
+    if (!confirm('リセットする？')) return;
+    visitCounts.reset($scope);
+  }
 }
 
 // 殴った回数を localStorage に保存する
-app.factory('saveVisitCount', function(storage) {
+app.factory('visitCounts', function(storage) {
+  var key = 'counts';
   var counts;
   // count の初期値を storage からもらう
   var init = function(dojo, scope) {
@@ -31,18 +36,28 @@ app.factory('saveVisitCount', function(storage) {
     if (!dojo) return;
     if (dojo.count == null) return;
     counts[dojo.id] = dojo.count;
-    storage.set('counts', counts);
+    storage.set(key, counts);
   }
-  return function(scope) {
-    counts = storage.get('counts') || {};
-    scope.$watch('dojos', function(dojos) {
-      angular.forEach(dojos, function(dojo) {
-        init(dojo, scope);
-        scope.$watchCollection(
-          function() { return dojo },
-          listener);
+  return {
+    // $scope.dojos と storage の count を同期
+    bind: function(scope) {
+      counts = storage.get(key) || {};
+      scope.$watch('dojos', function(dojos) {
+        angular.forEach(dojos, function(dojo) {
+          init(dojo, scope);
+          scope.$watchCollection(
+            function() { return dojo },
+            listener);
+        });
       });
-    });
+    },
+    // リセットする
+    reset: function(scope) {
+      angular.forEach(scope.dojos, function(dojo) {
+        dojo.count = 0;
+      });
+      storage.remove(key);
+    }
   }
 });
 
