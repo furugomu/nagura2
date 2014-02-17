@@ -21,7 +21,7 @@ exports.next = (req, res) ->
     dojo = dojos[index]
     res.cookie('index', String(++index), {expires: next5ji()})
     url = 'http://sp.pf.mbga.jp/12008305/?url=' + encodeURIComponent(
-      'http://125.6.169.35/idolmaster/battle/battle_check/'+dojo.id)
+      'http://125.6.169.35/idolmaster/battles/battle_check/'+dojo.id)
     res.redirect(url)
 
 next5ji = ->

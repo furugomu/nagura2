@@ -56,7 +56,7 @@ describe 'routes', ->
 
       it 'リダイレクトする', ->
         url = 'http://sp.pf.mbga.jp/12008305/?url='+
-          'http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattle%2Fbattle_check%2F'+
+          'http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattles%2Fbattle_check%2F'+
           String(dojos[0].id)
         routes.next(req, res)
         expect(res.redirect.calledWith(url)).to.be.true
