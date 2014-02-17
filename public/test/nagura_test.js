@@ -113,7 +113,7 @@ describe('directives', function() {
     it('href=道場を殴る URL', function() {
       var el = $compile('<nagura-dojo-link>ほげ</nagura-dojo-link>')(scope);
       var url = 'http://sp.pf.mbga.jp/12008305/?url='+
-        'http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattle%2Fbattle_check%2F56497169';
+        'http%3A%2F%2F125.6.169.35%2Fidolmaster%2Fbattles%2Fbattle_check%2F56497169';
       expect(el.attr('href')).to.equal(url);
     });
 
